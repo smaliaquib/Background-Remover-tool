@@ -86,11 +86,12 @@ def process(input_path, output_path, model_name="u2net",
         raise Exception("Bad input parameter! Please indicate the correct path to the file or folder.")
 
 
-def cli():
-    input_path = "input/000d63b0bf94e9ed6e5460f38aaf741223e92cc4474405401664dacdfcf09115.jpg"
-    output_path = "output/1.png"
+def cli(path):
+
+    input_path = "input/"+path.split('\\')[1]
+    output_path = "output/"+path.split('\\')[1]
     model_name = "u2net"
-    preprocessing_method_name = "bbd-fastrcnn"
+    preprocessing_method_name = "bbmd-maskrcnn"
     postprocessing_method_name = "rtb-bnb"
 
     if model_name == "test":
@@ -100,4 +101,7 @@ def cli():
 
 
 if __name__ == "__main__":
-    cli()
+    from glob import glob
+    for i in glob('input/*.jpg'):
+        print(i)
+        cli(i)
